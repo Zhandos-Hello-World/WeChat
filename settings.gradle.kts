@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "WeChat"
 include(":app")
- 
+include(":reactionx")

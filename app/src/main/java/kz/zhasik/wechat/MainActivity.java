@@ -1,7 +1,6 @@
 package kz.zhasik.wechat;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,12 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import kz.zhasik.wechat.coreData.network.RetrofitProvider;
-import kz.zhasik.wechat.data.network.PeopleApiService;
-import kz.zhasik.wechat.data.network.model.ProfileResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import kz.zhasik.wechat.presentation.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,19 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         ChatService chatService = new ChatService();
 
-
-        RetrofitProvider.getInstance().create(PeopleApiService.class).getProfile().enqueue(new Callback<ProfileResponse>() {
-            @Override
-            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-
-                ProfileResponse profileResponse = response.body();
-                Log.d("ProfileResponse",  profileResponse.toString());
-            }
-
-            @Override
-            public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main, new ProfileFragment())
+                .commit();
     }
 }
