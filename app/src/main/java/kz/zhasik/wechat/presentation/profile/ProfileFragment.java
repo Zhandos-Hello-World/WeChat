@@ -20,6 +20,7 @@ import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
     private TextView textView;
+    private ProfileViewModel viewModel;
 
     @Nullable
     @Override
@@ -35,22 +36,11 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RetrofitProvider.getInstance()
-                .create(PeopleApiService.class)
-                .getProfile()
-                .enqueue(new Callback<>() {
-            @Override
-            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-                ProfileResponse profileResponse = response.body();
-                Log.d("ProfileResponse",  profileResponse.toString());
-                textView.setText(profileResponse.toString());
-            }
+        PeopleApiService apiService = RetrofitProvider.getInstance()
+                .create(PeopleApiService.class);
+        viewModel = new ProfileViewModel(apiService);
 
-            @Override
-            public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        viewModel.getProfile();
 
     }
 }

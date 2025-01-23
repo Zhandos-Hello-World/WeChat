@@ -1,6 +1,5 @@
 package kz.concurrent.reactionx;
 
-public interface Task {
-
-
+public interface Task<T> {
+    T run();
 }
