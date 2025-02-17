@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-optimizations !class/unboxing/enum,!code/allocation/variable
+-allowaccessmodification
+-mergeinterfacesaggressively
+-ignorewarnings
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-dontusemixedcaseclassnames
+-dontpreverify
+-renamesourcefileattribute SourceFile
+-keepattributes *Annotation*
